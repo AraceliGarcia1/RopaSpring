@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <a class="navbar-brand">ROPA</a>
+            <div class="d-flex">
+                <button class="btn btn-outline-danger" type="submit">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="d-flex" style="margin-right: 10px; margin-bottom: 20px; justify-content: right; align-items: flex-end;">
+            <button class="btn btn-success"data-bs-toggle="modal" data-bs-target="#formModalR">Agregar +</button>
+        </div>
+        <div class="row justify-content-center">
+            <table class="table table-striped table-hover" id="prenda-table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Talla</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Descuento</th>
+                    <th scope="col">Costo</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="tmpRopa : ${listRopa}">
+                        <td th:text="${index+1}"></td>
+                        <td th:text="${nombre}"></td>
+                        <td th:text="${marca}"></td>
+                        <td th:text="${talla}"></td>
+                        <td th:text="${color}"></td>
+                        <td th:text="${descuento}"></td>
+                        <td th:text="${costo}"></td>
+                        <td th:text="${stock}"></td>
+                        <td th:text="${status}"></td>
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- Modal Modificar-->
+        <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel1">Modifica la Prenda</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="id1" name="id1" style="margin-bottom:10px">
+                        <br>
+                        <label>Nombre</label>
+                        <input type="text" id="nombre1" name="nombre1" style="margin-bottom:10px;">
+                        <br>
+                        <label>Marca</label>
+                        <input type="text" id="marca1" name="marca1" style="margin-bottom:10px;">
+                        <br>
+                        <label>Talla</label>
+                        <input type="text" id="talla1" name="talla1" style="margin-bottom:10px;">
+                        <br>
+                        <label>Color</label>
+                        <input type="text" id="color1" name="color1" style="margin-bottom:10px;">
+                        <br>
+                        <label>Descuento</label>
+                        <input type="text" id="desc1" name="desc1" style="margin-bottom:10px;">
+                        <br>
+                        <label>Costo</label>
+                        <input type="number" id="costo1" name="costo1" style="margin-bottom:10px;">
+                        <br>
+                        <label>Stock</label>
+                        <input type="number" id="stock1" name="stock1" style="margin-bottom:10px;">
+                        <input type="hidden" id="status1" name="status1" style="margin-bottom:10px">
+                        <br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="updateRegistro" onclick="updateS()">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Registrar-->
+        <div class="modal fade" id="formModalR" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Registra una Prenda</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label>Nombre</label>
+                        <input type="text" id="nombre" name="nombre" style="margin-bottom:10px;">
+                        <br>
+                        <label>Marca</label>
+                        <input type="text" id="marca" name="marca" style="margin-bottom:10px;">
+                        <br>
+                        <label>Talla</label>
+                        <input type="text" id="talla" name="talla" style="margin-bottom:10px;">
+                        <br>
+                        <label>Color</label>
+                        <input type="text" id="color" name="color" style="margin-bottom:10px;">
+                        <br>
+                        <label>Descuento</label>
+                        <input type="number" id="descuento" name="descuento" style="margin-bottom:10px;">
+                        <br>
+                        <label>Costo</label>
+                        <input type="number" id="costo" name="costo" style="margin-bottom:10px;">
+                        <br>
+                        <label>Stock</label>
+                        <input type="number" id="stock" name="stock" style="margin-bottom:10px;">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="registrar()">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
